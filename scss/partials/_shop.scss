@@ -1,0 +1,59 @@
+// TIENDA DE UMICHUFIS
+
+@import '../variables/variables';
+@import "../variables/mixins";
+
+    .tiendaContainer{
+        @include flex(flex, row, center);
+        flex-wrap: wrap;
+
+        .itemUmichufis {
+            @include flex(flex, row, center);
+            flex-wrap: wrap;
+            background-color: $blanco;
+            width: 300px;
+            border-radius: 15px;
+            -webkit-box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.6);
+            box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.6);
+            margin: 1rem;
+            padding: 0.5rem;
+
+            @media screen and (max-width: 620px) {
+                margin: 1rem 0;
+            }
+
+            img {
+                width: 100%;
+                transition: all 0.2s ease;
+                max-height: 284px;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+
+            .itemUmichufisBody {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+
+                h2 {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    margin: 0.5rem 0;
+                }
+
+                h3 {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin: 0.5rem 0;
+                }
+
+                a {
+                    margin-top: 0.5rem;
+                }
+            }
+        }
+    }

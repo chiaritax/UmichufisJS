@@ -1,0 +1,33 @@
+// INICIO MI HISTORIA
+
+@import "../variables/variables";
+@import "../variables/mixins";
+
+.container  {
+  .storieContainerText {
+    text-align: center;
+    color: $black;
+    font-family: $fuenteTextos;
+  }
+}
+
+.storieUmichufis {
+  @include flex(flex, row, center);
+  height: 500px;
+  align-items: center;
+  background-color: $black;
+  clip-path: polygon(0 9%, 100% 4%, 100% 97%, 0 80%);
+
+  .storieUmichufisPicture {
+    width: 400px;
+  }
+}
+.familyFlex {
+  @include flex(flex, row, center);
+  
+  .familyUmichufis {
+    @include flex(flex, row, center);
+    align-items: center;
+    max-width: 900px;
+  }
+}

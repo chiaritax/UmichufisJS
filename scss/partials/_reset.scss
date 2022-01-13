@@ -1,0 +1,19 @@
+// RESETEO DE ESTILOS
+
+@import "../variables/variables";
+@import "../variables/mixins";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+
+  body {
+    background-color: $whitesmoke;
+    overflow-x: hidden;
+  }

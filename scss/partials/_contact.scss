@@ -1,0 +1,98 @@
+// PAGINA DE CONTACTO
+
+@import "../variables/variables";
+@import "../variables/extend";
+
+.textContainerContact {
+  margin-left: 3rem;
+  margin-top: 2.5rem;
+  color: $black;
+  font-family: $fuenteTextos;
+
+  h2 {
+    font-family: $fuenteTitulo;
+  }
+
+  .contactOne {
+      color: $black;
+  }
+  .contactTwo {
+      color: $black;
+  }
+}
+
+.contactForm {
+  font-family: $fuenteTextos;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+
+  form {
+    min-width: 100%;
+  }
+
+  .contactFormName {
+    @include flex (flex, column, center);
+
+    label {
+      font-size: 0.7rem;
+    }
+
+    input {
+     @extend %inputs;
+    }
+  }
+
+  .contactFormEmail {
+    @include flex (flex, column, center);
+
+    label {
+      font-size: 0.7rem;
+    }
+
+    input {
+      @extend %inputs;
+    }
+  }
+
+  .contactFormUser {
+    @include flex (flex, column, center);
+    
+
+    label {
+      font-size: 0.7rem;
+    }
+
+    select {
+      @extend %inputs;
+    }
+  }
+
+  textarea {
+    @extend %inputs;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .contactFormBtn {
+    button {
+      background: linear-gradient(
+        90deg,
+        $pastelMagenta 0%,
+        $pastelMagentaOscuro 100%
+      );
+      border: 1px solid $pastelMagenta;
+      color: $blanco;
+      font-size: 1rem;
+      border-radius: 10px;
+      padding: 0.2rem 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.192);
+      }
+    }
+  }
+}

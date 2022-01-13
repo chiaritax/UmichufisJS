@@ -1,0 +1,477 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+body {
+  background-color: #f5f5f5;
+  overflow-x: hidden; }
+
+header {
+  background-color: #000;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.923);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.923); }
+  header .navContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; }
+    header .navContainer .logo {
+      width: 75px; }
+    header .navContainer .menuDesplegable {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0; }
+      @media screen and (max-width: 768px) {
+        header .navContainer .menuDesplegable {
+          flex-direction: column;
+          flex-wrap: nowrap;
+          margin-bottom: 1rem;
+          width: 90%; } }
+      header .navContainer .menuDesplegable li {
+        list-style: none;
+        font-size: 1rem;
+        margin-left: 1.5rem;
+        padding: 8px;
+        color: #000;
+        background-color: #f5f5f5;
+        border: 1px solid #000;
+        border-radius: 10px; }
+        @media screen and (max-width: 768px) {
+          header .navContainer .menuDesplegable li {
+            width: 90%;
+            text-align: center;
+            margin: 0.3rem 0; } }
+        header .navContainer .menuDesplegable li:hover {
+          background-color: #bc467d; }
+          header .navContainer .menuDesplegable li:hover a {
+            color: #fff !important; }
+        header .navContainer .menuDesplegable li:first-child {
+          margin-left: 0; }
+        header .navContainer .menuDesplegable li a {
+          text-decoration: none;
+          color: #000 !important;
+          font-family: "Roboto", sans-serif;
+          padding: 12px; }
+          @media screen and (max-width: 768px) {
+            header .navContainer .menuDesplegable li a {
+              padding: 12px 80px; } }
+      header .navContainer .menuDesplegable .active {
+        background-color: #bc467d; }
+        header .navContainer .menuDesplegable .active a {
+          color: #fff !important; }
+    header .navContainer div i {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      cursor: pointer; }
+      header .navContainer div i:hover {
+        color: #bc467d; }
+    header .navContainer .btnMenuDesplegable {
+      border: 1px solid #bc467d;
+      font-size: 1rem;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #bc467d 0%, #a85079 100%);
+      text-decoration: none;
+      color: #f5f5f5;
+      text-align: center;
+      display: inline-block;
+      cursor: pointer;
+      font-family: "Nunito", sans-serif;
+      margin-right: 0.7rem; }
+      header .navContainer .btnMenuDesplegable:hover {
+        -webkit-box-shadow: 0px 0px 8px 1px rgba(121, 121, 121, 0.6);
+        box-shadow: 0px 0px 8px 1px rgba(121, 121, 121, 0.6);
+        color: #f5f5f5; }
+
+.titleContainer {
+  color: #000;
+  margin-top: 2rem;
+  text-align: center;
+  font-family: "Roboto", sans-serif; }
+  .titleContainer .titleContainerTitle {
+    font-size: 2.876rem; }
+    .titleContainer .titleContainerTitle .titleContainerUmichufis {
+      color: #bc467d; }
+  .titleContainer .titleContainerSubtitle {
+    color: #000; }
+
+.monthFav .monthFavTitle {
+  font-size: 2.875rem;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #000; }
+
+.contactTitle {
+  text-align: center;
+  color: #000;
+  font-family: "Roboto", sans-serif; }
+
+.titleCombos {
+  color: #000;
+  margin-top: 2rem;
+  text-align: center;
+  font-family: "Roboto", sans-serif; }
+  .titleCombos .titleContainerTitle {
+    font-size: 2.876rem; }
+    .titleCombos .titleContainerTitle .titleContainerUmichufis {
+      color: #bc467d; }
+
+.collage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 400px;
+  align-items: center;
+  background-color: #000;
+  clip-path: polygon(0 15%, 100% 4%, 100% 97%, 0 80%); }
+  .collage .collageUmichufis {
+    margin-bottom: 4.3rem;
+    width: 43%;
+    max-width: 500px; }
+    @media screen and (max-width: 375px) {
+      .collage .collageUmichufis {
+        width: 120%; } }
+    @media screen and (max-width: 424px) {
+      .collage .collageUmichufis {
+        margin-bottom: 0; } }
+    @media screen and (min-width: 376px) and (max-width: 768px) {
+      .collage .collageUmichufis {
+        width: 100%; } }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      .collage .collageUmichufis {
+        width: 70%; } }
+
+.carouselUmichufis {
+  max-width: 800px;
+  margin: 0 auto; }
+
+.monthFav {
+  margin: 3rem 0; }
+  .monthFav .xmasPromo {
+    background-image: url(../assets/images/navidadPromo.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end; }
+  @media screen and (max-width: 768px) {
+    .monthFav .xmasPromo {
+      height: 300px; } }
+
+.xmasPromoContainer {
+  display: grid;
+  justify-content: center;
+  grid-template-areas: "uno dos tres" "cuatro cinco seis";
+  gap: 10px; }
+  @media screen and (max-width: 900px) {
+    .xmasPromoContainer {
+      grid-template-areas: "uno dos" "tres cuatro" "cinco seis"; } }
+  @media screen and (max-width: 600px) {
+    .xmasPromoContainer {
+      grid-template-areas: "uno" "dos" "tres" "cuatro" "cinco" "seis"; } }
+  .xmasPromoContainer .comboXmas1 {
+    grid-area: uno; }
+  .xmasPromoContainer .comboXmas2 {
+    grid-area: dos; }
+  .xmasPromoContainer .comboXmas3 {
+    grid-area: tres; }
+  .xmasPromoContainer .comboXmas4 {
+    grid-area: cuatro; }
+  .xmasPromoContainer .comboXmas5 {
+    grid-area: cinco; }
+  .xmasPromoContainer .comboXmas6 {
+    grid-area: seis; }
+  .xmasPromoContainer div img:hover {
+    transform: scale(1.03);
+    -webkit-box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.6); }
+
+.container  .storieContainerText {
+  text-align: center;
+  color: #000;
+  font-family: "Nunito", sans-serif; }
+
+.storieUmichufis {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 500px;
+  align-items: center;
+  background-color: #000;
+  clip-path: polygon(0 9%, 100% 4%, 100% 97%, 0 80%); }
+  .storieUmichufis .storieUmichufisPicture {
+    width: 400px; }
+
+.familyFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+  .familyFlex .familyUmichufis {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px; }
+
+.tiendaContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap; }
+  .tiendaContainer .itemUmichufis {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #fff;
+    width: 300px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.6);
+    margin: 1rem;
+    padding: 0.5rem; }
+    @media screen and (max-width: 620px) {
+      .tiendaContainer .itemUmichufis {
+        margin: 1rem 0; } }
+    .tiendaContainer .itemUmichufis img {
+      width: 100%;
+      transition: all 0.2s ease;
+      max-height: 284px; }
+      .tiendaContainer .itemUmichufis img:hover {
+        transform: scale(1.1); }
+    .tiendaContainer .itemUmichufis .itemUmichufisBody {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center; }
+      .tiendaContainer .itemUmichufis .itemUmichufisBody h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0.5rem 0; }
+      .tiendaContainer .itemUmichufis .itemUmichufisBody h3 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0.5rem 0; }
+      .tiendaContainer .itemUmichufis .itemUmichufisBody a {
+        margin-top: 0.5rem; }
+
+.containerCarousel {
+  max-width: 700px;
+  margin: 0 auto; }
+
+.masFotosText {
+  margin: 1rem 0;
+  text-align: center;
+  color: #000; }
+
+.collageGaleriaContainer {
+  display: grid;
+  justify-content: center;
+  grid-template-areas: "uno dos tres" "cuatro cinco seis"; }
+  @media screen and (max-width: 900px) {
+    .collageGaleriaContainer {
+      grid-template-areas: "uno dos" "tres cuatro" "cinco seis"; } }
+  @media screen and (max-width: 600px) {
+    .collageGaleriaContainer {
+      grid-template-areas: "uno" "dos" "tres" "cuatro" "cinco" "seis"; } }
+  .collageGaleriaContainer .collageGaleriaItem1 {
+    grid-area: uno; }
+  .collageGaleriaContainer .collageGaleriaItem2 {
+    grid-area: dos; }
+  .collageGaleriaContainer .collageGaleriaItem3 {
+    grid-area: tres; }
+  .collageGaleriaContainer .collageGaleriaItem4 {
+    grid-area: cuatro; }
+  .collageGaleriaContainer .collageGaleriaItem5 {
+    grid-area: cinco; }
+  .collageGaleriaContainer .collageGaleriaItem6 {
+    grid-area: seis; }
+  .collageGaleriaContainer div img:hover {
+    transform: scale(1.03);
+    -webkit-box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.6); }
+
+.contactForm .contactFormName input, .contactForm .contactFormEmail input, .contactForm .contactFormUser select , .contactForm textarea {
+  padding: 8px 15px !important;
+  border: 1px solid #949494;
+  background-color: #fff;
+  color: #4a648e;
+  max-width: 100%;
+  line-height: 1.2;
+  border-radius: 2px; }
+
+.textContainerContact {
+  margin-left: 3rem;
+  margin-top: 2.5rem;
+  color: #000;
+  font-family: "Nunito", sans-serif; }
+  .textContainerContact h2 {
+    font-family: "Roboto", sans-serif; }
+  .textContainerContact .contactOne {
+    color: #000; }
+  .textContainerContact .contactTwo {
+    color: #000; }
+
+.contactForm {
+  font-family: "Nunito", sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem; }
+  .contactForm form {
+    min-width: 100%; }
+  .contactForm .contactFormName {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+    .contactForm .contactFormName label {
+      font-size: 0.7rem; }
+  .contactForm .contactFormEmail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+    .contactForm .contactFormEmail label {
+      font-size: 0.7rem; }
+  .contactForm .contactFormUser {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+    .contactForm .contactFormUser label {
+      font-size: 0.7rem; }
+  .contactForm textarea {
+    width: 100%;
+    margin-top: 1rem; }
+  .contactForm .contactFormBtn button {
+    background: linear-gradient(90deg, #bc467d 0%, #a85079 100%);
+    border: 1px solid #bc467d;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 10px;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer; }
+    .contactForm .contactFormBtn button:hover  {
+      box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.192); }
+
+.botonEnviar {
+  margin-top: 0.2rem; }
+  .botonEnviar button {
+    font-family: "Nunito", sans-serif;
+    border: 1px solid #bc467d;
+    font-size: 1rem;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #bc467d 0%, #a85079 100%);
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    width: 150px;
+    cursor: pointer;
+    font-family: "Nunito", sans-serif; }
+    .botonEnviar button:hover {
+      -webkit-box-shadow: 0px 0px 8px 1px rgba(121, 121, 121, 0.6);
+      box-shadow: 0px 0px 8px 1px rgba(121, 121, 121, 0.6); }
+
+.itemUmichufisBody a {
+  font-family: "Nunito", sans-serif;
+  border: 1px solid #bc467d;
+  font-size: 1rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #bc467d 0%, #a85079 100%);
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  width: 150px;
+  cursor: pointer;
+  font-family: "Nunito", sans-serif; }
+  .itemUmichufisBody a:hover {
+    -webkit-box-shadow: 0px 0px 8px 1px rgba(121, 121, 121, 0.6);
+    box-shadow: 0px 0px 8px 1px rgba(121, 121, 121, 0.6); }
+
+.botonTienda {
+  margin: 0.5rem 0;
+  text-align: center; }
+  .botonTienda a {
+    font-family: "Nunito", sans-serif;
+    border: 1px solid #bc467d;
+    font-size: 1rem;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #bc467d 0%, #a85079 100%);
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    width: 250px;
+    cursor: pointer;
+    font-family: "Nunito", sans-serif; }
+    .botonTienda a:hover {
+      -webkit-box-shadow: 0px 0px 8px 1px rgba(121, 121, 121, 0.6);
+      box-shadow: 0px 0px 8px 1px rgba(121, 121, 121, 0.6); }
+
+footer {
+  min-height: 330px;
+  background-color: #000;
+  clip-path: polygon(0 0, 100% 28%, 100% 100%, 0 100%);
+  color: #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
+  @media screen and (max-width: 768px) {
+    footer {
+      flex-direction: column;
+      clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%); } }
+  footer .socialContainer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: "Nunito", sans-serif; }
+    @media screen and (max-width: 768px) {
+      footer .socialContainer {
+        margin-top: 2rem; } }
+    footer .socialContainer i {
+      font-size: 2rem;
+      color: #f5f5f5;
+      cursor: pointer;
+      text-align: center;
+      margin: 10px; }
+      footer .socialContainer i:hover {
+        color: #bc467d !important; }
+  footer .informationContainer .informationContainerTitle {
+    font-size: 1.5rem;
+    text-decoration-line: underline; }
+  footer .informationContainer .informationContainerItems {
+    font-family: "Nunito", sans-serif; }
+  footer .contactContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: "Nunito", sans-serif; }
+    footer .contactContainer .contactContainerTitle {
+      font-size: 1.5rem;
+      text-decoration-line: underline; }
+    footer .contactContainer .contactContainerBox .contactContainerBoxname {
+      font-size: 1.5rem;
+      text-decoration-line: underline;
+      text-align: center; }
+    footer .contactContainer .boxContainer {
+      text-align: center; }
+      @media screen and (max-width: 768px) {
+        footer .contactContainer .boxContainer {
+          margin-bottom: 1rem; } }

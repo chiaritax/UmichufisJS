@@ -1,0 +1,26 @@
+// INICIO BOTONES
+
+@import "../variables/variables";
+@import "../variables/mixins";
+
+
+.botonEnviar {
+  margin-top: 0.2rem;
+  button {
+    @include buttons($fuenteTextos, $pastelMagenta, $pastelMagentaOscuro, $blanco, 150px);
+  }
+}
+
+.itemUmichufisBody {
+  a {
+    @include buttons($fuenteTextos, $pastelMagenta, $pastelMagentaOscuro, $blanco, 150px);
+  }
+}
+
+.botonTienda {
+  margin: 0.5rem 0;
+  text-align: center;
+  a {
+    @include buttons($fuenteTextos, $pastelMagenta, $pastelMagentaOscuro, $blanco, 250px);
+  }
+}
