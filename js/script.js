@@ -31,31 +31,37 @@ const products = [
     {
         nombre: "Buzo Umichufis",
         precio: 2000,
+        img: "../assets/images/BuzoUmichufis.webp",
         id: 1
     },
     {
         nombre: "Buzo Umichufis Limited Edition",
         precio: 2300,
+        img: "../assets/images/BuzoUmichufisDos.webp",
         id: 2
     },
     {
         nombre: "Barbijo Umichufis",
         precio: 550,
+        img: "../assets/images/BarbijosUmichufis.webp",
         id: 3
     },
     {
         nombre: "Buzo Queen Umichufis",
         precio: 2900,
+        img: "../assets/images/QueenUmichufis.webp",
         id: 4
     },
     {
         nombre: "Taza Umichufis",
         precio: 900,
+        img: "../assets/images/TazaUmichufis.webp",
         id: 5
     },
     {
         nombre: "Libro Umichufis",
         precio: 1900,
+        img: "../assets/images/libroUmichufis.webp",
         id: 6
     }
 ];
@@ -67,6 +73,30 @@ const totalPrice = () => {
     });
     return total;
 }
+
+let containerProd = document.getElementById('productContainer');
+
+const renderProducts = () => {
+    products.forEach(product => {
+        var productCard = document.createElement('div');
+        productCard.classList.add('itemUmichufis');
+        productCard.innerHTML = `
+                                    <img
+                                    src="${product.img}"
+                                    alt="Buzo Queen Umichufis"
+                                    loading=""lazy""
+                                    />
+                                    <div class="itemUmichufisBody">
+                                        <h2>${product.nombre}</h2>
+                                        <h3>$${product.precio}</h3>
+                                        <a href="#">Agregar al carrito</a>
+                                    </div>
+                                    `;
+                                    containerProd.appendChild(productCard);
+    });
+}
+
+renderProducts();
 
 const askForAnotherProduct = () => {
     const answer = prompt("¿Quieres agregar otro producto? Escriba 'Si' o 'No'");
