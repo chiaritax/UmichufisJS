@@ -68,6 +68,15 @@ header {
             padding: 12px 80px;
           }
         }
+
+        i {
+          color: $black;
+          font-size: 1.5rem;
+          width: 100%;
+          &:hover {
+            color: $blanco;
+          }
+        }
       }
 
       .active {
@@ -88,6 +97,12 @@ header {
         &:hover {
           color: $pastelMagenta;
         }
+      }
+    }
+
+    .active {
+      i {
+        color: $pastelMagenta;
       }
     }
 

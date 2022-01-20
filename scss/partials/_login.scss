@@ -1,0 +1,18 @@
+// RESETEO DE ESTILOS
+
+@import "../variables/variables";
+@import "../variables/mixins";
+
+.form-control:focus {
+    border-color: $pastelMagenta;
+    box-shadow: 0 0 0 0.13rem $pastelMagenta;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    display: block;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 auto;
+}

@@ -11,6 +11,22 @@
   }
 }
 
+.btnSubmitLogin {
+  button {
+    @include buttons($fuenteTextos, $pastelMagenta, $pastelMagentaOscuro, $blanco, 120px);
+    border-radius: 4px;
+    font-weight: 600;
+  }
+}
+
+.btnBuyCart {
+  button {
+    @include buttons($fuenteTextos, $pastelMagenta, $pastelMagentaOscuro, $blanco, 120px);
+    border-radius: 4px;
+    font-weight: 600;
+  }
+}
+
 .itemUmichufisBody {
   a {
     @include buttons($fuenteTextos, $pastelMagenta, $pastelMagentaOscuro, $blanco, 150px);

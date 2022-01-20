@@ -1,31 +1,8 @@
 const clients = [];
-const productsInCart = [];
 
-class Client {
-    constructor(name, lastName, age, email) {
-        this.name = name;
-        this.lastName = lastName;
-        this.age = age;
-        this.email = email;
-    }
-}
+const orders = localStorage.getItem("orders") ? JSON.parse(localStorage.getItem("orders")) : [];
 
-const newClient = () => {
-    alert(`Hola vamos a crear tu perfil!`);
-    let client = new Client(prompt(`Ingresa tu nombre:`), prompt(`Ingresa tu apellido:`), prompt(`Ingresa tu edad:`), prompt(`Ingresa tu email:`));
-    clients.push(client);
-    alert(`Bienvenido ${client.name} ${client.lastName}`);
-    console.table(clients);
-    askProduct();
-}
-
-class Product {
-    constructor(name, price) {
-        this.name = name;
-        this.price = price;
-    }
-}
-
+let productsInCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
 
 const products = [
     {
@@ -63,16 +40,103 @@ const products = [
         precio: 1900,
         img: "../assets/images/libroUmichufis.webp",
         id: 6
-    }
+    },
+
 ];
 
-const totalPrice = () => {
-    let total = 0;
+const users = [
+    {
+        name: "Umichufis",
+        lastName: "Giando",
+        email: "umichufis@umichufis.com",
+        password: "soyumichufis123",
+        profile_img: "../assets/images/chufisThree.webp"
+    },
+    {
+        name: "Chiari",
+        lastName: "Fernandez Querol",
+        email: "chiaritax@umichufis.com",
+        password: "soychiaritax123",
+        profile_img: "../assets/images/umichufisFamily.webp"
+    },
+]
+
+let productCounter = document.getElementById('productCount');
+
+const countProducts = () => {
+    let count = 0;
     productsInCart.forEach(product => {
-        total += product.precio;
+        count += product.quantity;
     });
-    return total;
+    productCounter.innerHTML = count;
 }
+
+let btnLogin = document.getElementById("submitLoginBtn");
+
+const submitLogin = (email, password) => {
+    const user = users.find(user => user.email === email && user.password === password);
+    if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        userLogged = user;
+        isLogged();
+        $('#exampleModal').modal('hide');
+    } else {
+        let bodyModalLogin = document.getElementById("loginBody");
+        bodyModalLogin.innerHTML += `
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> Usuario o contraseña incorrectos.
+            </div>
+            `;
+    }
+}
+
+btnLogin.addEventListener("click", () => {
+    const email = document.getElementById("emailLogin").value;
+    const password = document.getElementById("passwordLogin").value;
+    submitLogin(email, password);
+});
+
+let userLogged = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : false;
+
+const isLogged = () => {
+    if (userLogged) {
+        let profile = document.getElementById("userProfile");
+        profile.innerHTML = "";
+        profile.innerHTML += `
+                                <img src="${userLogged.profile_img}" class="profile-img" data-bs-toggle="modal" data-bs-target="#exampleModal2" />
+                            `;
+        let profile_small = document.getElementById("userProfile2");
+        profile_small.innerHTML = "";
+        profile_small.innerHTML += `
+                                <img src="${userLogged.profile_img}" class="profile-img" data-bs-toggle="modal" data-bs-target="#exampleModal2" />
+                            `;
+    } else {
+        let profile = document.getElementById("userProfile");
+        profile.innerHTML = "";
+        profile.innerHTML += `
+                                <i class="fas fa-user" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            `;
+        let profile_small = document.getElementById("userProfile2");
+        profile_small.innerHTML = "";
+        profile_small.innerHTML += `
+                                <i class="fas fa-user" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            `;
+    }
+}
+
+isLogged();
+
+const userLogout = () => {
+    localStorage.removeItem("user");
+    userLogged = false;
+    isLogged();
+}
+
+const btnLogout = document.getElementById("submitLogout");
+
+btnLogout.addEventListener("click", () => {
+    userLogout();
+});
 
 let containerProd = document.getElementById('productContainer');
 
@@ -84,64 +148,169 @@ const renderProducts = () => {
                                     <img
                                     src="${product.img}"
                                     alt="Buzo Queen Umichufis"
-                                    loading=""lazy""
+                                    loading="“lazy”"
                                     />
                                     <div class="itemUmichufisBody">
                                         <h2>${product.nombre}</h2>
                                         <h3>$${product.precio}</h3>
-                                        <a href="#">Agregar al carrito</a>
+                                        <a href="#" onClick="addToCart(${product.id})">Agregar al carrito</a>
                                     </div>
                                     `;
-                                    containerProd.appendChild(productCard);
+        containerProd.appendChild(productCard);
     });
 }
 
-renderProducts();
+let totalContainer = document.getElementById('totalContainer');
 
-const askForAnotherProduct = () => {
-    const answer = prompt("¿Quieres agregar otro producto? Escriba 'Si' o 'No'");
-    if (answer == "si" || answer == "Si" || answer == "SI") {
-        askProduct();
-    } else if (answer == "no" || answer == "No" || answer == "NO") {
-        alert(`${name} Tu compra tiene un total de $${totalPrice()}`);
-        askForNewProduct();
+const totalPrice = () => {
+    let total = 0;
+    productsInCart.forEach(product => {
+        total += product.precio * product.quantity;
+    });
+    const options = {
+        style: "currency",
+        currency: "USD"
+    }
+    const numberFormat = new Intl.NumberFormat('en-US', options)
+    if (total > 0) {
+        totalContainer.innerHTML = `
+                                    <h2>Total: ${numberFormat.format(total)}</h2>
+                                    <div class="btnBuyCart">
+                                        <button onClick="buyProducts()">Comprar</button>
+                                    </div>
+                                    
+                                    `;
     } else {
-        alert("Respuesta no válida");
-        askForAnotherProduct();
+        totalContainer.innerHTML = "";
     }
 }
 
-const askForNewProduct = () => {
-    const answer = prompt("¿Quieres crear otro producto? Escriba 'Si' o 'No'");
-    if (answer == "si" || answer == "Si" || answer == "SI") {
-        let newProduct = new Product(prompt("Nombre del producto"), Number(prompt("Precio del producto")));
-        alert(`${newProduct.name} fue agregado a la lista de productos con un precio de $${newProduct.price}`);
-        products.push(newProduct);
-        askForNewProduct();
-    } else if (answer == "no" || answer == "No" || answer == "NO") {
-        alert(`${clients[0].name} que tengas un buen día! :)`);
+let containerCart = document.getElementById('cartContainer');
+
+const renderCart = () => {
+    containerCart.innerHTML = "";
+    if (productsInCart.length > 0) {
+        containerCart.innerHTML += `
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h5>Producto</h5>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h5>Precio</h5>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h5>Cantidad</h5>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h5>Subtotal</h5>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h5>Eliminar</h5>
+                                        </div>
+                                    </div>
+                                    `
+
+        productsInCart.forEach(product => {
+            let subtotal = Number(product.precio) * Number(product.quantity);
+            var cartItem = document.createElement('div');
+            cartItem.classList.add('row', 'cartItemContainer');
+            cartItem.innerHTML += `
+                                        <div class="col cartItem">${product.nombre}</div>
+                                        <div class="col cartItem">$${product.precio}</div>
+                                        <div class="col cartItem">${product.quantity}</div>
+                                        <div class="col cartItem">$${subtotal}</div>
+                                        <div class="col cartItem">
+                                            <i class="fas fa-trash-alt" onClick="removeFromCart(${product.id})"></i>
+                                        </div>
+                                        `;
+            containerCart.appendChild(cartItem);
+        });
+        countProducts();
+        totalPrice();
     } else {
-        alert("Respuesta no válida");
-        askForNewProduct();
+        containerCart.innerHTML = `
+                                    <div class="row mt-5">
+                                        <div class="col text-center">
+                                            <h3>Tu carrito está vacio</h3>
+                                        </div>
+                                    </div>
+                                    `;
     }
+
+}
+
+
+const buyProducts = () => {
+    if (userLogged) {
+        let total = 0;
+        productsInCart.forEach(product => {
+            total += product.precio * product.quantity;
+        });
+        let order = {
+            user: userLogged,
+            products: productsInCart,
+            total: total
+        }
+        orders.push(order);
+        localStorage.setItem("orders", JSON.stringify(orders));
+        alert("Compra realizada con éxito");
+        productsInCart = [];
+        localStorage.setItem("cart", JSON.stringify(productsInCart));
+        renderCart();
+        totalPrice();
+    } else {
+        alert("Debes iniciar sesión para realizar la compra");
+    }
+}
+
+const whatToRender = () => {
+    let path = window.location.pathname;
+    console.log(path);
+    if (path === "/pages/tienda.html") {
+        renderProducts();
+    } else if (path === "/pages/cart.html") {
+        renderCart();
+    }
+}
+whatToRender();
+
+const addToCart = (id) => {
+    const product = products.find(product => product.id == id);
+
+    if (productsInCart.length > 0) {
+        var dontExist = true;
+        for (let i = 0; i < productsInCart.length; i++) {
+            if (productsInCart[i].id == id) {
+                productsInCart[i].quantity += 1;
+                dontExist = false;
+            }
+        }
+        if (dontExist) {
+            product.quantity = 1;
+            productsInCart.push(product);
+        }
+    } else {
+        product.quantity = 1;
+        productsInCart.push(product);
+    }
+    localStorage.setItem("cart", JSON.stringify(productsInCart));
+    countProducts();
+}
+
+const removeFromCart = (id) => {
+    for (let i = 0; i < productsInCart.length; i++) {
+        if (productsInCart[i].id == id) {
+            productsInCart.splice(i, 1);
+        }
+    }
+    localStorage.setItem("cart", JSON.stringify(productsInCart));
+    renderCart();
+    totalPrice();
 }
 
 const orderProducts = () => {
     let orderedProducts = products.sort((a, b) => (a.precio > b.precio ? 1 : -1));
     console.table(orderedProducts)
 }
-orderProducts();
 
-const askProduct = () => {
-    const productId = prompt(`¿Qué producto deseas agregar? Escriba el ID del producto \n 1 - ${products[0].nombre} \n 2 - ${products[1].nombre} \n 3 - ${products[2].nombre} \n 4 - ${products[3].nombre} \n 5 - ${products[4].nombre} \n 6 - ${products[5].nombre}`);
-    const product = products.find(product => product.id == productId);
-    if (product) {
-        productsInCart.push(product);
-        alert(`${product.nombre} agregado al carrito`);
-        askForAnotherProduct();
-    } else {
-        alert("Producto no encontrado");
-        askProduct();
-    }
-}
-newClient();
+countProducts();

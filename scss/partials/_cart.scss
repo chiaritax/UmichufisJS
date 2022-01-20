@@ -1,0 +1,33 @@
+// RESETEO DE ESTILOS
+
+@import "../variables/variables";
+@import "../variables/mixins";
+
+.cartItemContainer{
+    @include flex(flex, row, center);
+    margin: 1rem;
+    .cartItem {
+        padding: 0.5rem;
+        text-align: center;
+        border-bottom: 1.5px solid $pastelMagenta;
+    }
+}
+
+.productCounter {
+    background-color: $blanco;
+    border-radius: 50%;
+    border-color: $blanco;
+    position: relative;
+    bottom: 16px;
+    right: 26px;
+    color: $black;
+}
+
+.totalPriceContainer {
+    text-align: right;
+    #totalContainer {
+        padding: 0.5rem;
+        text-align: center;
+        border-bottom: 1.5px solid $pastelMagenta;
+    }
+}

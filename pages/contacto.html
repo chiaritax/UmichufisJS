@@ -76,11 +76,7 @@
     <header>
       <nav class="navContainer">
         <a href="../index.html">
-          <img
-            class="logo"
-            src="../assets/images/UmichufisLogo.webp"
-            alt="Logo Umichufis"
-          />
+          <img class="logo" src="../assets/images/UmichufisLogo.webp" alt="Logo Umichufis" />
         </a>
         <ul class="menuDesplegable d-none d-md-flex">
           <li><a href="../index.html">Home</a></li>
@@ -89,33 +85,26 @@
           <li><a href="galeria.html">Galeria</a></li>
           <li class="active"><a href="contacto.html">Contactanos</a></li>
         </ul>
-        <div class="d-none d-md-flex">
-          <i class="fas fa-shopping-cart"></i>
+        <div class="d-none d-md-flex align-items-center justify-content-center">
+          <div>
+            <a href="cart.html">
+              <i class="fas fa-shopping-cart"></i>
+              <span id="productCount" class="badge productCounter"></span>
+            </a>
+          </div>
+          <div id="userProfile">
+            <i class="fas fa-user" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+          </div>
         </div>
-        <button
-          class="btn btnMenuDesplegable d-md-none d-sm-block"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
+        <button class="btn btnMenuDesplegable d-md-none d-sm-block" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
           <i class="fas fa-bars"></i>
         </button>
-
-        <div
-          class="offcanvas offcanvas-end"
-          tabindex="-1"
-          id="offcanvasRight"
-          aria-labelledby="offcanvasRightLabel"
-        >
+  
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
           <div class="offcanvas-header">
             <h5 id="offcanvasRightLabel">Umichufis</h5>
-            <button
-              type="button"
-              class="btn-close text-reset"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
             <ul class="menuDesplegable">
@@ -124,12 +113,68 @@
               <li><a href="tienda.html">Tienda</a></li>
               <li><a href="galeria.html">Galeria</a></li>
               <li class="active"><a href="contacto.html">Contactanos</a></li>
+              <li><i class="fas fa-shopping-cart"></i></li>
+              <li id="userProfile2">
+                <i class="fas fa-user" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
     <!--FIN HEADER -->
+  
+    <!-- Modals -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="loginBody">
+            <form>
+              <div class="mb-3">
+                <label for="emailLogin" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="emailLogin" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              </div>
+              <div class="mb-3">
+                <label for="passwordLogin" class="form-label">Password</label>
+                <input type="password" class="form-control" id="passwordLogin">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <div class="btnSubmitLogin">
+              <button type="button" class="btn" id="submitLoginBtn">Ingresar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Logout</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Quieres cerrar sesión?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <div class="btnSubmitLogin">
+              <button type="button" class="btn" data-bs-dismiss="modal" id="submitLogout">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!--TITULO PRINCIPAL -->
     <section class="titleContainer">
@@ -162,7 +207,7 @@
           </div>
           <div class="contactFormEmail">
             <label for="email">E-Mail</label>
-            <input type="email" name="email" id="email" placeholder="E-Mail" />
+            <input type="email" name="email" id="emailComment" placeholder="E-Mail" />
           </div>
 
           <div class="contactFormUser">
@@ -177,7 +222,7 @@
           <div>
             <textarea
               name="comentario"
-              id=""
+              id="comment"
               cols="30"
               rows="10"
               placeholder="Dejanos tu comentario"
@@ -265,10 +310,12 @@
 
     <!-- BOOTSTRAP -->
     <!-- JavaScript Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>
