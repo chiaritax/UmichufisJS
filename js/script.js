@@ -61,6 +61,63 @@ const users = [
     },
 ]
 
+let profileContainer = document.getElementById("profileContainer");
+
+const renderProfile = () => {
+    let user = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : false;
+    if (user) {
+        let profile = document.createElement("div");
+        profile.classList.add("profile");
+        profile.innerHTML = `
+                            <div class="profileImg">
+                                <img src="${user.profile_img}" alt="profile_img" loading="“lazy”"/>
+                            </div>
+                            <div class="profileInfo">
+                                <h2>${user.name} ${user.lastName}</h2>
+                                <h3>${user.email}</h3>
+                                <div class="profileOptions">
+                                    <a href="#" onClick="userLogout()">Cerrar sesión</a>
+                                </div>
+                            </div>
+                            `;
+        profileContainer.appendChild(profile);
+        let orders = JSON.parse(localStorage.getItem("orders"));
+        if (orders.length > 0) {
+            const options = {
+                style: 'currency',
+                currency: 'USD',
+            }
+            const numberFormat = new Intl.NumberFormat('en-US', options);
+            let ordersHistory = document.getElementById("ordersHistory");
+            ordersHistory.innerHTML = "";
+            orders.forEach(order => {
+                let orderContainer = document.createElement("div");
+                orderContainer.classList.add("order");
+                orderContainer.innerHTML = `
+                                        <div class="orderInfo d-flex justify-content-around mt-5">
+                                            <h3>Orden #${order.orderId}</h3>
+                                            <h4>Total: ${numberFormat.format(order.total)}</h4>
+                                        </div>
+                                        <div class="orderProducts">
+                                            <div class="orderProductsContainer">
+                                                ${order.products.map(product => `
+                                                    <div class="orderProduct d-flex justify-content-around align-items-center">
+                                                        <img src="${product.img}" alt="product_img" loading="“lazy”"/>
+                                                        <h4>${product.nombre}</h4>
+                                                        <h5>${numberFormat.format(product.precio)}</h5>
+                                                    </div>
+                                                `).join("")}
+                                            </div>
+                                        </div>
+                                        `;
+                ordersHistory.appendChild(orderContainer);
+            });
+        }
+    } else {
+        window.location.href = "../index.html";
+    }
+}
+
 let productCounter = document.getElementById('productCount');
 
 const countProducts = () => {
@@ -99,16 +156,29 @@ btnLogin.addEventListener("click", () => {
 let userLogged = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : false;
 
 const isLogged = () => {
+    let path = window.location.pathname;
+    let href;
+
+    if (path === "/index.html") {
+        href = "pages/profile.html";
+    } else {
+        href = "profile.html";
+    }
+
     if (userLogged) {
         let profile = document.getElementById("userProfile");
         profile.innerHTML = "";
         profile.innerHTML += `
-                                <img src="${userLogged.profile_img}" class="profile-img" data-bs-toggle="modal" data-bs-target="#exampleModal2" />
+                                <a href="${href}">
+                                    <img src="${userLogged.profile_img}" class="profile-img" />
+                                </a>
                             `;
         let profile_small = document.getElementById("userProfile2");
         profile_small.innerHTML = "";
         profile_small.innerHTML += `
-                                <img src="${userLogged.profile_img}" class="profile-img" data-bs-toggle="modal" data-bs-target="#exampleModal2" />
+                                <a href="${href}">
+                                    <img src="${userLogged.profile_img}" class="profile-img" />
+                                </a>
                             `;
     } else {
         let profile = document.getElementById("userProfile");
@@ -130,6 +200,7 @@ const userLogout = () => {
     localStorage.removeItem("user");
     userLogged = false;
     isLogged();
+    window.location.href = "../index.html";
 }
 
 const btnLogout = document.getElementById("submitLogout");
@@ -167,11 +238,14 @@ const totalPrice = () => {
     productsInCart.forEach(product => {
         total += product.precio * product.quantity;
     });
+
     const options = {
-        style: "currency",
-        currency: "USD"
+        style: 'currency',
+        currency: 'USD',
     }
-    const numberFormat = new Intl.NumberFormat('en-US', options)
+
+    const numberFormat = new Intl.NumberFormat('en-US', options);
+
     if (total > 0) {
         totalContainer.innerHTML = `
                                     <h2>Total: ${numberFormat.format(total)}</h2>
@@ -249,27 +323,42 @@ const buyProducts = () => {
         let order = {
             user: userLogged,
             products: productsInCart,
-            total: total
+            total: total,
+            orderId: "UMI" + Math.floor(Math.random() * 1000000)
         }
         orders.push(order);
         localStorage.setItem("orders", JSON.stringify(orders));
-        alert("Compra realizada con éxito");
+
         productsInCart = [];
         localStorage.setItem("cart", JSON.stringify(productsInCart));
         renderCart();
         totalPrice();
+        countProducts();
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Compra realizada con éxito, gracias por comprar en nuestra tienda! Tu orden es: ' + order.orderId,
+            showConfirmButton: true
+        })
     } else {
-        alert("Debes iniciar sesión para realizar la compra");
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Debes iniciar sesión para realizar una compra',
+            showConfirmButton: true
+        })
     }
 }
 
 const whatToRender = () => {
     let path = window.location.pathname;
-    console.log(path);
-    if (path === "/pages/tienda.html") {
+    if (path.endsWith("/tienda.html")) {
         renderProducts();
-    } else if (path === "/pages/cart.html") {
+    } else if (path.endsWith("/cart.html")) {
         renderCart();
+    } else if (path.endsWith("/profile.html")) {
+        renderProfile();
     }
 }
 whatToRender();
@@ -295,6 +384,13 @@ const addToCart = (id) => {
     }
     localStorage.setItem("cart", JSON.stringify(productsInCart));
     countProducts();
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: `${product.nombre} agregado al carrito`,
+        showConfirmButton: false,
+        timer: 1500
+    })
 }
 
 const removeFromCart = (id) => {
@@ -306,6 +402,7 @@ const removeFromCart = (id) => {
     localStorage.setItem("cart", JSON.stringify(productsInCart));
     renderCart();
     totalPrice();
+    countProducts();
 }
 
 const orderProducts = () => {

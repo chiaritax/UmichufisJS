@@ -33,6 +33,12 @@
   }
 }
 
+.profileOptions {
+  a {
+    @include buttons($fuenteTextos, $pastelMagenta, $pastelMagentaOscuro, $blanco, 150px);
+  }
+}
+
 .botonTienda {
   margin: 0.5rem 0;
   text-align: center;

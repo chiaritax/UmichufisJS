@@ -1,0 +1,42 @@
+// RESETEO DE ESTILOS
+
+@import "../variables/variables";
+@import "../variables/mixins";
+
+#profileContainer {
+    .profile {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        max-width: 400px;
+        margin: 0 auto;
+        .profileImg {
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .profileInfo {
+            h2 {
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            h3 {
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+.orderProduct {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    max-height: 200px;
+    img {
+        width: 100px;
+    }
+}
