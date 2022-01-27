@@ -158,8 +158,9 @@ let userLogged = localStorage.getItem("user") ? JSON.parse(localStorage.getItem(
 const isLogged = () => {
     let path = window.location.pathname;
     let href;
+    console.log(path);
 
-    if (path === "/index.html") {
+    if (path.endsWith("/")) {
         href = "pages/profile.html";
     } else {
         href = "profile.html";
