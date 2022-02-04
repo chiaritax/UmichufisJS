@@ -412,3 +412,12 @@ const orderProducts = () => {
 }
 
 countProducts();
+
+$('#btnEnviar').click(function () {
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Gracias por contactarnos, pronto te responderemos!',
+        showConfirmButton: true
+    })
+})
