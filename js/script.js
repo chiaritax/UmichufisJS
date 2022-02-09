@@ -118,7 +118,7 @@ const renderProfile = () => {
     }
 }
 
-let productCounter = document.getElementById('productCount');
+let productCounter = document.querySelector('#productCount');
 
 const countProducts = () => {
     let count = 0;
@@ -128,7 +128,7 @@ const countProducts = () => {
     productCounter.innerHTML = count;
 }
 
-let btnLogin = document.getElementById("submitLoginBtn");
+let btnLogin = document.querySelector("#submitLoginBtn");
 
 const submitLogin = (email, password) => {
     const user = users.find(user => user.email === email && user.password === password);
@@ -138,7 +138,7 @@ const submitLogin = (email, password) => {
         isLogged();
         $('#exampleModal').modal('hide');
     } else {
-        let bodyModalLogin = document.getElementById("loginBody");
+        let bodyModalLogin = document.querySelector("#loginBody");
         bodyModalLogin.innerHTML += `
             <div class="alert alert-danger" role="alert">
                 <strong>Error!</strong> Usuario o contraseña incorrectos.
@@ -413,11 +413,49 @@ const orderProducts = () => {
 
 countProducts();
 
-$('#btnEnviar').click(function () {
-    Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Gracias por contactarnos, pronto te responderemos!',
-        showConfirmButton: true
-    })
+const messages = localStorage.getItem("messages") ? JSON.parse(localStorage.getItem("messages")) : [];
+
+$('#btnEnviar').click(function (e) {
+    e.preventDefault();
+    var name = $('#name').val();
+    var email = $('#email').val();
+    var userType = $('#userType').val();
+    var comment = $('#comment').val();
+    var emailRegEx = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+    if (name == '' || email == '' || comment == '' || userType == '') {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Debes llenar todos los campos',
+            showConfirmButton: true
+        })
+    } else if (!email.match(emailRegEx)) {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'El email no es válido',
+            showConfirmButton: true
+        })
+    } else {
+        var message = {
+            name: name,
+            email: email,
+            userType: userType,
+            comment: comment
+        }
+        messages.push(message);
+        localStorage.setItem("messages", JSON.stringify(messages));
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `${name} gracias por contactarnos, pronto te responderemos a ${email}!`,
+            showConfirmButton: true
+        })
+    }
 })
+
+$('#umichufisLogo').animate({
+    opacity: 0.2
+}).delay(200).animate({
+    opacity: 1
+});
