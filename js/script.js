@@ -4,45 +4,24 @@ const orders = localStorage.getItem("orders") ? JSON.parse(localStorage.getItem(
 
 let productsInCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
 
-const products = [
-    {
-        nombre: "Buzo Umichufis",
-        precio: 2000,
-        img: "../assets/images/BuzoUmichufis.webp",
-        id: 1
-    },
-    {
-        nombre: "Buzo Umichufis Limited Edition",
-        precio: 2300,
-        img: "../assets/images/BuzoUmichufisDos.webp",
-        id: 2
-    },
-    {
-        nombre: "Barbijo Umichufis",
-        precio: 550,
-        img: "../assets/images/BarbijosUmichufis.webp",
-        id: 3
-    },
-    {
-        nombre: "Buzo Queen Umichufis",
-        precio: 2900,
-        img: "../assets/images/QueenUmichufis.webp",
-        id: 4
-    },
-    {
-        nombre: "Taza Umichufis",
-        precio: 900,
-        img: "../assets/images/TazaUmichufis.webp",
-        id: 5
-    },
-    {
-        nombre: "Libro Umichufis",
-        precio: 1900,
-        img: "../assets/images/libroUmichufis.webp",
-        id: 6
-    },
+let products = [];
 
-];
+if (location.pathname.endsWith("tienda.html")) {
+    document.addEventListener("DOMContentLoaded", dbProducts);
+}
+
+function dbProducts() {
+    $.ajax({
+        url: "../db/products.json",
+        success: function (response) {
+            console.log(response);
+            products = response;
+            whatToRender();
+        }, error: function (error) {
+            console.log(error);
+        }
+    });
+}
 
 const users = [
     {
